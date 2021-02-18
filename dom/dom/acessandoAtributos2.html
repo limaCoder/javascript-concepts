@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='UTF-8'>
+    <title>Acessando Atributos #02</title>
+    <link rel='stylesheet' href='css/estilo.css'>
+</head>
+
+<body class='conteudo exercicio'>
+    <div>
+        <label for="compras">Compras</label>
+        <ul id="compras" destino='escritório' data-urgencia="5"> <!-- atributos personalizados. Espera-se que o atributo
+        personalizado comece com o prefixo 'data', ele tem preferência. Mas isso não quer dizer que ele precise ser 
+        usado -->
+            <li>Café</li>
+            <li>Água</li>
+            <li>Copo Descartável</li>
+        </ul>
+    </div>
+    <script>
+        const lista = document.querySelector('div ul[destino="escritório"]') /* acessando um atributo personalizado */
+        console.log('Elemento "ul"...............')
+        console.log('childNodes', lista.childNodes)
+        console.log('destino', lista.destino) /* não funciona :( */
+        console.log('getAttribute', lista.getAttribute('destino')) /* funciona :) */
+        console.log('hasAttribute', lista.hasAttribute('destino')) /* pergunta se lista tem o elemento destino */
+        lista.setAttribute('destino', 'empresa') /* substitui o primeiro valor pelo segundo */
+        lista.setAttribute('status', 'aberto') /* como não existe esse atributo, não será setado nada */
+        lista.removeAttribute('destino') /* removendo atributo de um elemento */
+        console.log(lista.dataset.urgencia)
+        lista.dataset.urgencia /* o urgencia como sufixo de data, que é o que se espera que seja recebido, sem o 
+        - que não é reconhecido pelo JS com a notação ponto, torna urgencia atributo do atributo data(dataset) */ = 4
+        console.log(lista.getAttribute('data-urgencia'))
+
+        // cuidado
+        const label = document.querySelector('label')
+        console.log(label.for) /* por for ser uma palavra reservada do Javascript, não será acessado pela notação ponto aqui */
+        console.log(label.htmlFor) /* deve ser acessado assim */
+        console.log(label.getAttribute('for')) /* ou assim */
+    </script>
+</body>
+
+</html>

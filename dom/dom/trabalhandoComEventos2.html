@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='UTF-8'>
+    <title>Trabalhando com Eventos #02</title>
+    <link rel='stylesheet' href='css/estilo.css'>
+</head>
+
+<body class="conteudo exercicio">
+    <div>Elemento</div>
+    <script>
+        const item = document.querySelector('div')
+        item.style.position = 'absolute'
+
+        item.onmousemove = e => { 
+            const item = e.target
+            item.style.cursor = 'move' /* mudando o estilo do cursor do mouse para aquele de mover */
+            if (e.buttons) { /* e.button - se o elemento estiver clicado, valor será diferente de 0, e se for, será 
+            verdadeiro e executar os comando de baixo */
+                item.style.top/* setando o elemento que disparou o evento (no caso a div) de onde ela está em relação ao topo
+                da página*/ = `${e.clientY - (item.clientHeight / 2)}px` /* clientY - onde o cursor do mouse está no 
+                eixo vertical. Com essa operação é possível mover o elemento de cima(por isso o top) para baixo. */
+                item.style.left = `${e.clientX - (item.clientWidth / 2)}px` /* clientX - onde o cursor do mouse está no 
+                eixo horizontal. Com essa operação é possível mover o elemento da esquerda(por isso o left) para direita. */
+            }
+        }
+    </script>
+</body>

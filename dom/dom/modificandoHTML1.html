@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='UTF-8'>
+    <title>Modificando HTML #01</title>
+    <link rel='stylesheet' href='css/estilo.css'>
+</head>
+
+<body class='conteudo exercicio'>
+    <script>
+        const body = document.querySelector('body')
+
+        const div1 = document.createElement('div') /* criando um elemento(tag) com DOM */
+        div1.classList.add('destaque')
+        div1.innerHTML = 'Primeiro'
+
+        const div2 = document.createElement('div')
+        div2.setAttribute('wm-atributo', 'valor')
+        div2.innerHTML = 'Segundo'
+
+        const p = document.createElement('p')
+        p.innerHTML = 'Terceiro'
+        const div3 = document.createElement('div')
+        div3.appendChild(p)
+
+        body.appendChild(div1) /* Adiciona um nó ao final da lista de filhos de um nó pai especificado(body). Se o nó já 
+        existir no documento, ele é removido de seu nó pai atual antes de ser adicionado ao novo pai. */
+        body.appendChild(div2)
+        body.appendChild(div3)
+
+        const texto = document.createTextNode('Antes...') /* criando um texto no DOM */
+        div3.insertBefore(texto, div3.childNodes[0]) /* o primeiro parâmetro é o filho que você deseja colocar, e o segundo a
+        posição onde ele será inserido */
+
+        const div4 = div3.cloneNode(true) /* clonando um elemento. se for true, copia os pais e filhos, se for false copia
+        apenas o pai */
+        body.appendChild(div4)
+        body.removeChild(div3)
+    </script>
+</body>
+
+</html>

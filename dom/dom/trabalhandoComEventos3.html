@@ -1,0 +1,78 @@
+</html>
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='UTF-8'>
+    <title>Trabalhando com Eventos #03</title>
+    <style>
+        body {
+            margin: 0;
+            display: flex;
+        }
+        
+        .esquerda {
+            height: 100vh;
+            width: 50%;
+            background-color: coral;
+        }
+        
+        .direita {
+            height: 100vh;
+            width: 50%;
+            background-color: cornflowerblue;
+        }
+        
+        .item {
+            border: solid 5px black;
+            background-color: darkgrey;
+            color: white;
+            height: 100px;
+            font-size: 40px;
+            margin: 10px;
+            vertical-align: middle;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="esquerda" wm-dropzone>
+        <div class="item">1</div>
+        <div class="item">2</div>
+        <div class="item">3</div>
+        <div class="item">4</div>
+    </div>
+    <div class="direita" wm-dropzone></div>
+    <script>
+        const items = document.querySelectorAll('[wm-dropzone] .item')
+        items.forEach((item, index) => {
+            item.draggable = true // transformando em um elemento que pode ser arrastado
+            item.id = item.id || `draggable-item-${index}` /* setando um id para item / com o índice */
+            item.ondragstart = e => /* quando começar a arrastar o elemento */
+                e.dataTransfer.setData('item-id', e.target.id) 
+                /* e = elemento
+                dataTransfer = Guarda dados do elemento que está sendo arrastado
+                setData('Formato', ' dados ')
+                Dados : é o id que está sendo capturado no elemento ao clicar.
+                E esse item-id é o nome que a gente usa para conseguir acessar esse elemento que foi arrastado 
+                (podia ser qualquer nome que você julgue como apropriado para a situação).
+                Isso fica mais claro posteriormente no vídeo quando o Léo usa o e.dataTransfer.getData("item-id") para 
+                recuperar aquele elemento que ele movimentou. */
+        })
+
+        const dropzones = document.querySelectorAll('[wm-dropzone]')
+        dropzones.forEach(dropzone => {
+            dropzone.ondragover = e => e.preventDefault() /* ondrover = quando terminar de arrastar o elemento */
+            dropzone.ondrop = function(e) { /* drop = soltando o elemento */
+                const id = e.dataTransfer.getData('item-id')
+                const item = document.getElementById(id)
+                // e.target.appendChild(item) - o lugar que eu estiver soltando o elemento como filho será o e.target 
+                dropzone.appendChild(item) /* o item só sera adicionado como filho do elemento marcado com dropzone(nesse
+                caso as divs) */
+            }
+        })
+    </script>
+</body>
+
+</html>

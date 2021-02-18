@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='UTF-8'>
+    <title>Modificando HTML #02</title>
+    <link rel='stylesheet' href='css/estilo.css'>
+</head>
+
+<body class='conteudo exercicio'>
+    <div>
+        <p>Texto Inicial</p>
+    </div>
+    <script>
+        const div = document.querySelector('div')
+        div.innerHTML = 'Texto Alterado'
+        // div.outerHTML = 'Texto Alterado' - Altera todo o elemento também, como a div, a apagando nesse exemplo
+        div.insertAdjacentHTML('beforebegin', '<p>Antes Início</p>') /* insere um elemento HTML adjacente ao especificado(
+        nesse caso 'div') o primeiro parâmetro indica quando adicionar, e o segundo o elemento em si */
+        div.insertAdjacentHTML('afterbegin', '<p>Depois Início</p>')
+        div.insertAdjacentHTML('beforeend', '<p>Antes Fim</p>')
+        div.insertAdjacentHTML('afterend', '<p>Depois Fim</p>')
+
+        // somente texto (sem tags)
+        console.log(div.innerText)
+    </script>
+</body>
+
+</html>
